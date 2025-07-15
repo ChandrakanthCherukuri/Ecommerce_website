@@ -1,57 +1,59 @@
-// src/App.js (excerpt)
+// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import { CartProvider } from './context/CartContext';
-import PrivateRoute from './components/PrivateRoute';
-import AdminRoute from './components/AdminRoute';
-
-// Components
 import Navbar from './components/Navbar';
-
-// Pages
+import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
+import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage'; // Corrected casing
 import CartPage from './pages/CartPage';
+import CheckoutPage from './pages/CheckoutPage';
 import AddProductPage from './pages/AddProductPage';
-import CheckoutPage from './pages/CheckoutPage'; // <--- Make sure this is imported
+import EditProductPage from './pages/EditProductPage';
+import PrivateRoute from './components/PrivateRoute';
+import FashionPage from './pages/FashionPage'; // Import FashionPage
+import HomeLivingPage from './pages/HomeLivingPage'; // Import HomeLivingPage
 
-function App() {
+import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
+
+const App = () => {
   return (
     <Router>
-      <AuthProvider>
-        <CartProvider>
-          <Navbar />
-          <main>
-            <Routes>
-              {/* Public Routes */}
-              <Route path="/" element={<HomePage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<RegisterPage />} />
-              <Route path="/products" element={<ProductsPage />} />
-              <Route path="/product/:id" element={<ProductDetailsPage />} />
-              <Route path="/cart" element={<CartPage />} />
+      <Navbar />
+      <main className="min-h-screen">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/product/:id" element={<ProductDetailsPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/fashion" element={<FashionPage />} />       {/* New Fashion Route */}
+          <Route path="/homeliving" element={<HomeLivingPage />} /> {/* New Home & Living Route */}
 
-              {/* Private Routes (requires authentication) */}
-              <Route element={<PrivateRoute />}> {/* <--- Ensure this wrapper exists */}
-                <Route path="/checkout" element={<CheckoutPage />} /> {/* <--- ADD/VERIFY THIS ROUTE */}
-                {/* Add other authenticated routes here */}
-              </Route>
-
-              {/* Admin Routes (requires admin role) */}
-              <Route element={<AdminRoute />}> {/* <--- Ensure this wrapper exists */}
-                <Route path="/add-product" element={<AddProductPage />} />
-                {/* Add other admin routes here */}
-              </Route>
-            </Routes>
-          </main>
-        </CartProvider>
-      </AuthProvider>
+          {/* Private Routes */}
+          <Route element={<PrivateRoute />}>
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/add-product" element={<AddProductPage />} />
+            <Route path="/edit-product/:id" element={<EditProductPage />} />
+          </Route>
+          {/* Add other routes as needed */}
+        </Routes>
+      </main>
+      <Footer />
     </Router>
   );
-}
+};
 
-export default App;
+const AppWrapper = () => (
+  <AuthProvider>
+    <CartProvider>
+      <App />
+    </CartProvider>
+  </AuthProvider>
+);
+
+export default AppWrapper;

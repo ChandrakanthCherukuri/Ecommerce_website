@@ -1,32 +1,32 @@
-// src/pages/ProductsPage.jsx
+// src/pages/HomeLivingPage.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext'; // Assuming you use cart context
 
-const ProductsPage = () => {
+const HomeLivingPage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { addToCart } = useCart(); // Destructure addToCart from useCart
 
   useEffect(() => {
-    const fetchElectronicsProducts = async () => {
+    const fetchHomeLivingProducts = async () => {
       try {
         setLoading(true);
         setError(null);
-        // API call specifically for 'electronics' category
-        const res = await axios.get('http://localhost:5000/api/products?category=electronics');
+        // Fetch products specifically for the 'Home & Living' category
+        const res = await axios.get('http://localhost:5000/api/products?category=home');
         setProducts(res.data);
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching electronics products:', err);
-        setError('Failed to load electronics products. Please try again later.');
+        console.error('Error fetching home & living products:', err);
+        setError('Failed to load home & living products. Please try again later.');
         setLoading(false);
       }
     };
 
-    fetchElectronicsProducts();
+    fetchHomeLivingProducts();
   }, []);
 
   const handleAddToCart = (e, product) => {
@@ -37,21 +37,21 @@ const ProductsPage = () => {
 
   if (loading) {
     // Changed text color to light-text for dark background
-    return <div className="text-center py-8 text-light-text text-xl">Loading Electronics products...</div>;
+    return <div className="text-center py-8 text-light-text text-xl">Loading Home & Living products...</div>;
   }
 
   if (error) {
-    // Error text color adjusted for better visibility on dark background
-    return <div className="text-center py-8 text-red-400 text-xl">{error}</div>;
+    // Error text remains red, which is a good standard for errors
+    return <div className="text-center py-8 text-red-500 text-xl">{error}</div>;
   }
 
   return (
     <div className="container mx-auto p-4 py-8">
       {/* Main heading text changed to light-text for dark background */}
-      <h1 className="text-4xl font-extrabold text-light-text mb-8 text-center">Our Electronics Collection</h1>
+      <h1 className="text-4xl font-extrabold text-light-text mb-8 text-center">Home & Living Collection</h1>
       {products.length === 0 ? (
         // "No products found" text changed to medium-text for dark background
-        <p className="text-center text-medium-text text-lg">No electronics products found.</p>
+        <p className="text-center text-medium-text text-lg">No home & living products found.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.map((product) => (
@@ -88,4 +88,4 @@ const ProductsPage = () => {
   );
 };
 
-export default ProductsPage;
+export default HomeLivingPage;

@@ -28,11 +28,24 @@ router.post('/', auth, authorizeRoles('admin'), async (req, res) => {
 });
 
 // @route   GET /api/products
-// @desc    Get all products
+// @desc    Get all products or filter by category
 // @access  Public (Anyone can view products)
-router.get('/', async (req, res) => {
+router.get('/', async (req, res) => { // <--- THIS IS THE ROUTE TO UPDATE
   try {
-    const products = await Product.find(); // Fetch all products from MongoDB
+    const { category } = req.query; // Extract the 'category' query parameter from the URL
+    let filter = {}; // Initialize an empty filter object
+
+    // If a category query parameter is provided (e.g., /api/products?category=fashion)
+    if (category) {
+      // Add the category to our filter object.
+      // Mongoose will then use this to filter results from the database.
+      filter.category = category;
+    }
+
+    // Use the filter object in the Mongoose find method
+    // If filter is empty ({}), it will return all products.
+    // If filter is { category: 'fashion' }, it will return only fashion products.
+    const products = await Product.find(filter);
     res.json(products);
   } catch (err) {
     console.error('Error fetching products:', err.message);
