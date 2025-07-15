@@ -100,7 +100,7 @@ const CartPage = () => {
               </div>
             </div>
             {/* Themed price text */}
-            <div className="md:col-span-2 text-center text-lg text-medium-text">${item.product.price.toFixed(2)}</div>
+            <div className="md:col-span-2 text-center text-lg text-medium-text">₹{item.product.price.toFixed(2)}</div>
             <div className="md:col-span-2 flex items-center justify-center space-x-2">
               {/* Themed quantity buttons */}
               <button
@@ -121,7 +121,7 @@ const CartPage = () => {
               </button>
             </div>
             {/* Themed subtotal text */}
-            <div className="md:col-span-2 text-center text-lg font-bold text-light-text">${(item.product.price * item.quantity).toFixed(2)}</div>
+            <div className="md:col-span-2 text-center text-lg font-bold text-light-text">₹{(item.product.price * item.quantity).toFixed(2)}</div>
             <div className="md:col-span-1 text-center">
               {/* Themed remove button (soft red for icon) */}
               <button

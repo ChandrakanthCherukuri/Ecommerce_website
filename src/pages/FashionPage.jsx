@@ -61,7 +61,7 @@ const FashionPage = () => {
                 <div className="p-4">
                   <h2 className="text-lg font-semibold text-gray-800 truncate mb-1">{product.name}</h2>
                   <p className="text-gray-600 text-sm mb-2">{product.category}</p>
-                  <p className="text-xl font-bold text-gray-900 mb-3">${product.price.toFixed(2)}</p>
+                  <p className="text-xl font-bold text-gray-900 mb-3">₹{product.price.toFixed(2)}</p>
                   <button
                     onClick={(e) => handleAddToCart(e, product)}
                     className="w-full bg-blue-600 text-white py-2 px-4 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"

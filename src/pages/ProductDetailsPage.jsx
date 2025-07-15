@@ -83,7 +83,7 @@ const ProductDetailsPage = () => {
             {/* Description text changed to medium-text */}
             <p className="text-medium-text text-lg mb-4">{product.description}</p>
             {/* Price text changed to accent-500 (lime green) */}
-            <p className="text-accent-500 text-3xl font-extrabold mb-4">${product.price.toFixed(2)}</p>
+            <p className="text-accent-500 text-3xl font-extrabold mb-4">₹{product.price.toFixed(2)}</p>
             {/* Category, Brand, Stock labels changed to medium-text */}
             <p className="text-medium-text text-base mb-2">Category: <span className="font-semibold">{product.category}</span></p>
             <p className="text-medium-text text-base mb-2">Brand: <span className="font-semibold">{product.brand || 'N/A'}</span></p>

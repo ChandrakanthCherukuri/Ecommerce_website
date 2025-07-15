@@ -115,7 +115,7 @@ const CheckoutPage = () => {
                 <img src={item.product.imageUrl} alt={item.product.name} className="w-12 h-12 object-cover rounded mr-4" />
                 <span className="text-gray-800">{item.product.name} x {item.quantity}</span>
               </div>
-              <span className="text-gray-700">${(item.product.price * item.quantity).toFixed(2)}</span>
+              <span className="text-gray-700">₹{(item.product.price * item.quantity).toFixed(2)}</span>
             </div>
           ))}
         </div>

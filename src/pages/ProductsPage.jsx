@@ -69,7 +69,7 @@ const ProductsPage = () => {
                   {/* Product category text changed to medium-text */}
                   <p className="text-medium-text text-sm mb-2">{product.category}</p>
                   {/* Product price text changed to accent-500 (lime green) */}
-                  <p className="text-xl font-bold text-accent-500 mb-3">${product.price.toFixed(2)}</p>
+                  <p className="text-xl font-bold text-accent-500 mb-3">₹{product.price.toFixed(2)}</p>
                   <button
                     onClick={(e) => handleAddToCart(e, product)}
                     // Button background changed to accent-500, text to black for contrast
